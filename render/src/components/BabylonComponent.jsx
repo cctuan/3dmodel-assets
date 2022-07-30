@@ -1,5 +1,13 @@
 import React from "react";
-import { Vector3, HemisphericLight, DirectionalLight, AnimationPropertiesOverride, ArcRotateCamera, ShadowGenerator, SceneLoader, Color3 } from "@babylonjs/core";
+import {
+  Vector3,
+  HemisphericLight,
+  DirectionalLight,
+  AnimationPropertiesOverride,
+  ArcRotateCamera, ShadowGenerator,
+  SceneLoader, Color3,
+  MeshBuilder
+} from "@babylonjs/core";
 import * as GUI from '@babylonjs/gui/2D';
 import SceneComponent from "./SceneComponent"; // uses above component in same directory
 // import SceneComponent from 'babylonjs-hook'; // if you install 'babylonjs-hook' NPM.
@@ -36,6 +44,7 @@ const onSceneReady = (scene) => {
 
   // This attaches the camera to the canvas
   camera.attachControl(canvas, true);
+  const ground = MeshBuilder.CreateGround("ground1", {width: 1000, height: 1000, subdivisions: 2}, scene);
 
   SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/cctuan/3dmodel-assets/main/", "magan.babylon", scene, function (newMeshes, particleSystems, skeletons) {
       const skeleton = skeletons[0];
